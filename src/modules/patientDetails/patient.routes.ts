@@ -1,23 +1,22 @@
 import express, { Request, Response } from "express";
 import { createPatient, deletePatientById, getPatientById, updatePatientById } from "./controller.patient";
-import { createFoodChart, deleteFoodChartById, getFoodChartById, updateFoodChartById } from "../foodCharts/foodchart.controller";
 
 export const patientRoutes = express.Router();
 
-patientRoutes.post("/createfoodChart", async (req: Request, res: Response) => {
+patientRoutes.post("/create-patient", async (req: Request, res: Response) => {
   try {
-    const foodChart = req.body;
-    const result = await createFoodChart(foodChart);
+    const patientDetails = req.body;
+    const result = await createPatient(patientDetails);
     if (result?._id) {
       res.send({
         status: "success",
-        message: "created FoodChart document",
+        message: "created patient document",
         data: result,
       });
     } else {
       res.send({
         status: "error",
-        message: "error while creating FoodChart document",
+        message: "error while creating patient document",
         data: result,
       });
     }
@@ -27,20 +26,20 @@ patientRoutes.post("/createfoodChart", async (req: Request, res: Response) => {
 });
 
 
-patientRoutes.get("/getfoodChart/:id", async (req: Request, res: Response) => {
+patientRoutes.get("/get-patient/:id", async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const result = await getFoodChartById(id);
+    const result = await getPatientById(id);
     if (result?._id) {
       res.send({
         status: "success",
-        message: "retrieved FoodChart document",
+        message: "retrieved patient document",
         data: result,
       });
     } else {
       res.send({
         status: "error",
-        message: "error while retrieving FoodChart document",
+        message: "error while retrieving patient document",
         data: result,
       });
     }
@@ -50,21 +49,21 @@ patientRoutes.get("/getfoodChart/:id", async (req: Request, res: Response) => {
 });
 
 
-patientRoutes.put("/updatefoodChart/:id", async (req: Request, res: Response) => {
+patientRoutes.put("/update-patient/:id", async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
     const update = req.body;
-    const result = await updateFoodChartById(id, update);
+    const result = await updatePatientById(id, update);
     if (result?._id) {
       res.send({
         status: "success",
-        message: "updated FoodChart document",
+        message: "updated patient document",
         data: result,
       });
     } else {
       res.send({
         status: "error",
-        message: "error while updating FoodChart document",
+        message: "error while updating patient document",
         data: result,
       });
     }
@@ -74,20 +73,20 @@ patientRoutes.put("/updatefoodChart/:id", async (req: Request, res: Response) =>
 });
 
 
-patientRoutes.delete("/deletefoodChart/:id", async (req: Request, res: Response) => {
+patientRoutes.delete("/delete-patient/:id", async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const result = await deleteFoodChartById(id);
+    const result = await deletePatientById(id);
     if (result?._id) {
       res.send({
         status: "success",
-        message: "deleted FoodChart document",
+        message: "deleted patient document",
         data: result,
       });
     } else {
       res.send({
         status: "error",
-        message: "error while deleting FoodChart document",
+        message: "error while deleting patient document",
         data: result,
       });
     }
